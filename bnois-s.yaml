@@ -1,3 +1,5 @@
+name: "bnois ext/a/b"
+
 proxy-providers:
   sub-1:
     type: http
