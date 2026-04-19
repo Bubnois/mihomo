@@ -10,10 +10,10 @@ proxy-providers:
       interval: 600
 
 proxy-groups:
-  - name: auto
+  - name: ext/a/b
     type: select
     use:
     - "sub-1"
 
 rules:
-  - MATCH,auto
+  - MATCH,bnois/vps
