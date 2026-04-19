@@ -16,4 +16,4 @@ proxy-groups:
     - "sub-1"
 
 rules:
-  - MATCH,bnois/vps
+  - MATCH,ext/a/b
