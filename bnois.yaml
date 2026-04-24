@@ -10,29 +10,21 @@ proxy-providers:
       interval: 600
 
 proxy-groups:
-  - name: bnois
+  - name: "ext/vps"
     type: select
-    proxies:
-      - ext/vps
-      - a/b
-
-  - name: ext/vps
-    type: url-test
     use:
-      - sub-1
-    exclude-filter: "(?i)(🇷🇺|Russia|Россия|\\bRU\\b|-ru-)"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
+      - "sub-1"
+    exclude-filter: "(?i)(ru|russia|россия|msk|moscow|обход|белый|б/с)"
 
-  - name: a/b
-    type: url-test
+  - name: "a/b"
+    type: select
     use:
-      - sub-1
-    filter: "(?i)(🇷🇺|Russia|Россия|\\bRU\\b|-ru-)"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
+      - "sub-1"
+    filter: "(?i)(ru|russia|россия|msk|moscow|обход|белый|б/с)"
 
 rules:
-  - MATCH,bnois
+  - DOMAIN-SUFFIX,ru,a/b
+  - DOMAIN-SUFFIX,su,a/b
+  - DOMAIN-SUFFIX,рф,a/b
+
+  - MATCH,ext/vps
