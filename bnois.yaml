@@ -1,0 +1,38 @@
+proxy-providers:
+  sub-1:
+    type: http
+    url: "https://github.com/theakres/VPN/raw/main/sub.txt"
+    interval: 3600
+    path: ./providers/sub-1.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 600
+
+proxy-groups:
+  - name: bnois
+    type: select
+    proxies:
+      - ext/vps
+      - a/b
+
+  - name: ext/vps
+    type: url-test
+    use:
+      - sub-1
+    exclude-filter: "(?i)(🇷🇺|Russia|Россия|\\bRU\\b|-ru-)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  - name: a/b
+    type: url-test
+    use:
+      - sub-1
+    filter: "(?i)(🇷🇺|Russia|Россия|\\bRU\\b|-ru-)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+rules:
+  - MATCH,bnois
