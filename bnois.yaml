@@ -1,7 +1,7 @@
 proxy-providers:
   sub-1:
     type: http
-    url: "https://github.com/theakres/VPN/raw/main/sub.txt"
+    url: "https://sub.savemod.bot/3aYAzayL8B4xA6pe"
     interval: 3600
     path: ./providers/sub-1.yaml
     health-check:
